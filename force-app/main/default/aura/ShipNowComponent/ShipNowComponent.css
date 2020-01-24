@@ -1,0 +1,103 @@
+.THIS.slds-select {
+    font-weight: bold !important;
+}
+
+.THIS .slds-textarea{
+    height: 30px;
+    width: 517px !important;
+    
+}
+
+.THIS .slds-input{
+    width: 100%;
+   
+}
+
+.THIS .slds-button{
+      margin-left: 452px;
+}
+
+.THIS.slds-box{
+    width: 550px !important;
+    background-color: white;
+}
+
+.THIS .slds-checkbox{
+    padding-top: 30px !important;
+}
+
+
+.THIS .slds-button.slds-progress__marker{
+      margin-left: -5px ;
+}
+
+
+.THIS .slds-input.slds-combobox__input{
+    width: 518px !important;
+}
+.THIS .slds-tabs_default__link{
+    font-size: 15px;
+    font-weight: 600;
+}
+.THIS .slds-tabs_default__item slds-is-active{
+    font-size: 15px;
+    font-weight: 600;
+}
+.THIS.slds-button slds-button_neutral slds-size_full{
+    margin-left: 200px !important;
+}
+
+.THIS .slds-form-element__control{
+    margin-right: 20px;
+}
+.THIS .slds-text-vertical{
+    margin-left: 80px;
+}
+.THIS .slds-box cShipNow cObjectReApplication{
+    width: fit-content !important;
+}
+.THIS .field{
+    margin-left: 267px;
+    font-size: 20px;
+    color: maroon;
+}
+.THIS .field1{
+    margin-left: 165px;
+    font-size: 15px;
+    color: maroon;
+}
+
+
+.THIS .slds-button_destructive{
+    margin-left: 447px;
+}
+
+.THIS .slds-col.slds-size_1-of-2{
+    padding-left: 10px !important;
+    padding-top: 15px !important;
+}
+
+.THIS .comboboxlist{
+   padding-left: 10px !important;
+   padding-top: 15px !important; 
+}
+/*For Contact and Company Field*/
+.THIS .input {
+    width: 150px!important;
+}
+.THIS .input-button{
+    width: 150px!important;
+}
+.THIS .slds-pill{
+    width:150px;
+}
+.THIS .slds-hide{
+    width:250px;
+}
+
+.THIS .slds-show{
+  width: 150px;
+}
+.THIS .slds-button__icon{
+   margin-left: -685px;
+}

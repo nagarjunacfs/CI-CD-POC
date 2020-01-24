@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Respective_Hostel_Or_Transport_Fee</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(IF(  StudentFee__r.Hostel__c  ==true , 
+       ISBLANK( Hostel_Fee__c ), 
+       NOT( ISBLANK( Hostel_Fee__c ))) 
+      || IF(  StudentFee__r.Transportation__c  ==true , 
+	ISBLANK(  Transportation_Fee__c ), 
+	NOT(ISBLANK( Transportation_Fee__c ))))</errorConditionFormula>
+    <errorMessage>Enter either Hostel or Transport Fee but not both</errorMessage>
+</ValidationRule>

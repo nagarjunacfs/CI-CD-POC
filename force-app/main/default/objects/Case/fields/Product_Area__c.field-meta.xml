@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Area__c</fullName>
+    <externalId>false</externalId>
+    <label>Product Area</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Products__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Server Administration</fullName>
+                <default>false</default>
+                <label>Server Administration</label>
+            </value>
+            <value>
+                <fullName>Base Program</fullName>
+                <default>false</default>
+                <label>Base Program</label>
+            </value>
+            <value>
+                <fullName>Modules</fullName>
+                <default>false</default>
+                <label>Modules</label>
+            </value>
+            <value>
+                <fullName>Upgrade</fullName>
+                <default>false</default>
+                <label>Upgrade</label>
+            </value>
+            <value>
+                <fullName>Integration</fullName>
+                <default>false</default>
+                <label>Integration</label>
+            </value>
+            <value>
+                <fullName>Hardware</fullName>
+                <default>false</default>
+                <label>Hardware</label>
+            </value>
+            <value>
+                <fullName>Maintenance</fullName>
+                <default>false</default>
+                <label>Maintenance</label>
+            </value>
+            <value>
+                <fullName>Workflow</fullName>
+                <default>false</default>
+                <label>Workflow</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>RxWorks</controllingFieldValue>
+            <valueName>Server Administration</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RxWorks</controllingFieldValue>
+            <controllingFieldValue>Vision</controllingFieldValue>
+            <valueName>Base Program</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RxWorks</controllingFieldValue>
+            <controllingFieldValue>Vision</controllingFieldValue>
+            <valueName>Modules</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RxWorks</controllingFieldValue>
+            <controllingFieldValue>Vision</controllingFieldValue>
+            <valueName>Upgrade</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RxWorks</controllingFieldValue>
+            <controllingFieldValue>Vision</controllingFieldValue>
+            <valueName>Integration</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RxWorks</controllingFieldValue>
+            <controllingFieldValue>Vision</controllingFieldValue>
+            <valueName>Hardware</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Viva VPM</controllingFieldValue>
+            <valueName>Maintenance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Viva VPM</controllingFieldValue>
+            <valueName>Workflow</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

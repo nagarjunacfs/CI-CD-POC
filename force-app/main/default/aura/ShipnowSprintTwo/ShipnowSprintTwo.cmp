@@ -1,0 +1,247 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller ="ShipnowSprintTwocontroller">
+   
+    <aura:attribute name="isEdit" type="boolean" default="false"/>
+    
+    <aura:attribute name="Street"  type="String"/>
+    <aura:attribute name="Title"  type="String"/>
+    <aura:attribute name="City"  type="String"/>
+    <aura:attribute name ="recordlist" type ="List"/>
+    <aura:attribute name="toggle"  type="boolean" default="false"/>
+    <!--  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />-->
+    <aura:attribute name="State"  type="String"/>
+    <aura:attribute name="ZipCode"  type="String"/>
+    <aura:attribute name="Country"  type="String"/>
+    <aura:attribute name="Phone"  type="String"/>
+    <aura:attribute name="Company"  type="String"/>
+    <aura:attribute name="contactName"  type="String"/>
+    <aura:attribute name="isOpen"  type="boolean" default="false"/>
+    <aura:attribute name="isOpenrecords"  type="boolean" default="false"/>
+    <aura:attribute name="wrapperList" type="object"/>
+    <div>
+        <button class="slds-button slds-button_destructive" style="margin-left: 600px;margin-top: 35px;" onclick="{!c.EditOrder}">Edit Address</button>
+    </div>
+    <br></br>
+    <aura:if isTrue="{!v.isOpen}"> <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <lightning:buttonIcon iconName="utility:close"
+                                      onclick="{! c.close }"
+                                      alternativeText="close"
+                                      variant="bare-inverse"
+                                      class="slds-modal__close"/>
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header" style="width:651;">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Adding Courier Charges to Order</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_small" id="modal-content-id-1" style="width:651;">
+                    
+                    <div class="Titlecls">
+                        
+                        <lightning:input name="Title" label="Title"  style="width: 100%; font-weight: bold;" value="{!v.Title}"/>
+                        
+                    </div>
+                    
+                    
+                    
+                    <div class="streetcls">
+                        
+                        <lightning:input name="Street" label="Street"  style="width: 100%; font-weight: bold;" value="{!v.Street}"/>
+                        
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    <div class="slds-grid slds-wrap">
+                        
+                        <div class="slds-col slds-size_1-of-3">
+                            
+                            <lightning:input name="City" label="City"  style="font-weight: bold;" value="{!v.City}" />
+                            
+                        </div>
+                        
+                        <div class="slds-col slds-size_1-of-3">
+                            
+                            <lightning:input name="State" label="State"  style="font-weight: bold;" value="{!v.State}" />
+                            
+                        </div>
+                        
+                        <div class="slds-col slds-size_1-of-3">
+                            
+                            <lightning:input name="ZipCode" label="ZipCode"  style="font-weight: bold;" value="{!v.ZipCode}" />
+                            
+                        </div>
+                        
+                        <div class="slds-col slds-size_1-of-3">
+                            
+                            <lightning:input name="Country" label="Country"  style="font-weight: bold;" value="{!v.Country}" />
+                            
+                        </div>
+                        
+                        
+                        <div class="slds-col slds-size_1-of-3">
+                            
+                            <lightning:input name="Phone" label="Phone Number" style="font-weight: bold;" value="{!v.Phone}" />
+                            
+                        </div>
+                        
+                      <!--  <c:lookUp/>
+                        <c:customlookupFieldContact/>  -->
+                        
+                        <div class="slds-col slds-size_1-of-3">
+                            
+                            <div class="slds-form-element">
+                                
+                                <div class="slds-form-element__control">
+                                    
+                                    <div class="slds-checkbox">
+                                        
+                                        <input type="checkbox" name="options" id="checkbox-2" value="checkbox-2" style="font-weight: bold;" />
+                                        
+                                        <label class="slds-checkbox__label" for="checkbox-2">
+                                            
+                                            <span class="slds-checkbox_faux"></span>
+                                            
+                                            <span class="slds-form-element__label">Residential Address</span>
+                                            
+                                        </label>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer" style="width:651;">
+                    <lightning:button variant="neutral" 
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.closed }"/>
+                    <lightning:button variant="neutral" 
+                                      label="Submit"
+                                      title="Submit"
+                                      onclick="{!c.close}"/>
+                </footer>
+            </div>
+        </section>
+        
+    </aura:if>
+    <aura:if isTrue="{!v.isOpenrecords}">
+        
+        <thead>
+            <tbody>
+                <aura:iteration items="{!v.wrapperList.ship}" var ="shp">
+                    <div class="slds-page-header">
+                        <div class="slds-page-header__row">
+                            <div class="slds-page-header__col-title">
+                                <div class="slds-media">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                                            
+                                            <span class="slds-assistive-text">opportunity</span>
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        
+                                        <h1>
+                                            <span class="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">{!shp.Street__c}</span>
+                                        </h1>
+                                    </div>
+                                </div>
+                                <p class="slds-page-header__name-meta" style="margin-left: 10px;">{!shp.city__C} {!shp.Name}  {!shp.Country__c} </p>
+                                
+                                <button class="slds-button slds-button--icon" title="Edit" onclick="{!c.onEdit}">
+                                   <lightning:icon iconName="utility:edit" size="X-small"/>		
+                                    <span class="slds-assistive-text">Edit</span>
+                                </button> 
+                                
+                            </div><br/>
+                        </div>
+                        
+                    </div>
+                    
+                </aura:iteration>
+            </tbody>
+        </thead>
+        
+        <!-- </table>
+        </div>
+               
+             </tbody>
+         </table>-->
+        <!--  </aura:iteration>-->
+    </aura:if>
+    
+     <aura:if isTrue="{!v.isEdit}"> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header" style="width:651;">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Edit the Address</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_small" id="modal-content-id-1" style="width:651;">  
+                    <div class="Titlecls">
+                        <lightning:input name="Title" label="Title" style="width: 99%; font-weight: bold;" value="{!v.Title}"/>
+                    </div>
+                    <div class="streetcls">
+                        <lightning:input name="Street" label="Street" style="width: 99%; font-weight: bold;" value="{!v.Street}"/>
+                    </div>
+					<div id="addr2" class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:input name="City" label="City" style="width: 98%; font-weight: bold;" value="{!v.City}" />&nbsp;          
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:input name="State" label="State" style="width: 98%; font-weight: bold;" value="{!v.State}" />&nbsp;
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:input name="ZipCode" label="ZipCode" style="width: 98%; font-weight: bold;" value="{!v.ZipCode}" />&nbsp;
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:input name="Country" label="Country" style="width: 98%; font-weight: bold;" value="{!v.Country}" />&nbsp; 
+                        </div>
+                        <div class="slds-col slds-size_1-of-3"> 
+                            <lightning:input name="Phone" label="Phone Number" style="width: 98%; font-weight: bold;" value="{!v.Phone}" />&nbsp; 
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:input name="Company" label="Company" style="width: 98%; font-weight: bold;" value="{!v.Company}"/>&nbsp;
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:input name="contactName" label="Contact Name"  />
+                        </div>                        
+                        <div class="slds-col slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control">
+                                    <div id="chckbx" class="slds-checkbox">
+                                        <input type="checkbox" name="options" id="checkbox-2" value="checkbox-2" style="font-weight: bold;" />
+                                        <label class="slds-checkbox__label" for="checkbox-2">
+                                            <span class="slds-checkbox_faux"></span>
+                                            <span class="slds-form-element__label">Residential Address</span>
+                                        </label>   
+                                    </div>  
+                                </div>  
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+                <footer class="slds-modal__footer" style="width:651;">
+                     <lightning:button variant="neutral" 
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.closed }"/>
+                    <lightning:button variant="neutral" 
+                                      label="Submit"
+                                      title="Submit"
+                                      onclick="{!c.close}"/>
+                </footer>
+            </div>
+        </section>
+        
+    </aura:if>
+	
+</aura:component>

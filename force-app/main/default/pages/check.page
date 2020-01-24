@@ -1,0 +1,226 @@
+<apex:page controller="checkvalue" lightningStylesheets="true">
+ 
+    <apex:form >
+        <apex:pageBlock >
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <apex:pageBlockButtons style="float:right;width=80px" location="top" >
+                <apex:commandButton value="Cancel"  action="{!cancel}" style="font-weight:bold;font-size:12px;"/>
+                <apex:commandButton value="Submit"  action="{!save}" style="background:Blue;font-weight:bold;font-size:12px;color: white;"/>
+            </apex:pageBlockButtons>
+       
+            <div allign="margin-left">
+                <apex:pageBlock > 
+                    
+                    <apex:pageBlockSection >
+                        
+          
+                        <apex:pageBlockSectionItem >
+                            <apex:inputcheckbox value="{!chkBxacc}"  onclick="{!inputacc}" >
+                                
+                                
+                                <apex:actionSupport event="onchange"  action="{!clickacc}"/>  
+                            </apex:inputcheckbox>
+                            <apex:outputLabel styleClass="outlbl">Account</apex:outputLabel> 
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                    
+                    <apex:pageBlock id="Acc" rendered="{!AccCheck}" >
+                        <apex:pageBlockSection >
+                            <apex:outputPanel id="Acc2" >    
+                                <apex:pageBlockSectionItem rendered="{!displayInputputTextAcc}" >
+                                    
+                                    
+                                    <apex:pageBlockSection title="Record Type" rendered="{!AccCheck123}" >
+                                        <apex:selectcheckboxes layout="horizontal" value="{!selectedaccRec}" style="left ">                  
+                                            <apex:selectoptions value="{!accRecs}" />         
+                                        </apex:selectcheckboxes>
+                                    </apex:pageBlockSection>    
+                    
+                                </apex:pageBlockSectionItem>
+                            </apex:outputPanel>
+                            
+                        </apex:pageBlockSection>  
+                    </apex:pageBlock>
+                    
+ 
+                    <apex:pageBlockSection >
+                        
+                        <apex:pageBlockSectionItem >
+                            <apex:inputcheckbox value="{!chkBxCon}"   onclick="{!inputCon}"  > 
+                                
+                                <apex:actionSupport event="onchange"  action="{!clickCon}"/>  
+                            </apex:inputcheckbox>
+                            <apex:outputLabel styleClass="outlbl">Contact</apex:outputLabel>
+                        </apex:pageBlockSectionItem>
+                        
+         
+                    </apex:pageBlockSection>
+                    
+                    <apex:pageBlock id="Con" rendered="{!conCheck}" >
+                        <apex:pageBlockSection >
+                            <apex:outputPanel id="Con2">    
+                                <apex:pageBlockSectionItem rendered="{!displayInputputTextCon}">
+                                    
+                                    <apex:pageBlockSection title="Record Type" rendered="{!conCheck}" >
+                                        <apex:selectcheckboxes layout="Horizontal" value="{!selectedConRec}" style=" line-height: 12px;width: 800px;">                  
+                                            <apex:selectoptions value="{!ConRecs}" />         
+                                        </apex:selectcheckboxes>
+                                    </apex:pageBlockSection> 
+                                    
+                                    
+                                </apex:pageBlockSectionItem>
+                            </apex:outputPanel>
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+ 
+                    <apex:pageBlockSection >
+                        <apex:pageBlockSectionItem >
+                            
+                            <apex:inputcheckbox value="{!chkBxCs}" onclick="{!inputCs}"  > 
+                                
+                                <apex:actionSupport event="onchange"  action="{!clickcs}"/>  
+                                
+                            </apex:inputcheckbox>
+                            <apex:outputLabel styleClass="outlbl">Case</apex:outputLabel>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                     
+                    <apex:pageBlock id="Cs" rendered="{!csCheck}" >
+                        <apex:pageBlockSection >
+                            <apex:outputPanel id="Cs2" >    
+                                <apex:pageBlockSectionItem rendered="{!displayInputputTextCs}">
+                                    
+                                    <apex:pageBlockSection title="status" >
+                                        <apex:selectcheckboxes layout="Horizontal" value="{!selectedCsstatus}" style=" line-height: 20px;width: 800px;">                  
+                                            <apex:selectoptions value="{!Csstatuss}" />         
+                                        </apex:selectcheckboxes>
+                                    </apex:pageBlockSection>  
+                                    
+                                    <apex:pageBlockSection title="Recordtype"  >
+                                        <apex:selectcheckboxes layout="horizontal" value="{!selectedCsRecord}">                  
+                                            <apex:selectoptions value="{!CheckCsRec}" />         
+                                        </apex:selectcheckboxes>
+                                    </apex:pageBlockSection>
+                                    
+                                </apex:pageBlockSectionItem>
+                            </apex:outputPanel>
+                            
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+                
+
+                    <apex:pageBlockSection >
+                        <apex:pageBlockSectionItem >
+                            <apex:inputcheckbox value="{!chkBxOpp}" onclick="{!inputOpp}" >
+                                
+                                <apex:actionSupport event="onchange"  action="{!clickOpp}"/>  
+                                
+                            </apex:inputcheckbox>
+                            <apex:outputLabel styleClass="outlbl">Opportunity</apex:outputLabel>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                    
+                    <apex:pageBlock id="Opp" rendered="{!oppCheck}" >
+                        <apex:pageBlockSection >
+                            <apex:outputPanel layout="none" id="Opp2" >    
+                                <apex:pageBlockSectionItem rendered="{!displayInputputTextOpp}" >
+                                    <apex:pageBlockSection title="Status" >
+                                        <apex:selectcheckboxes styleclass="check" layout="" value="{!selectedOppStg}" >                  
+                                            <apex:selectoptions value="{!OppStgs}">
+                                                </apex:selectoptions>
+                                        </apex:selectcheckboxes>
+                                    </apex:pageBlockSection> 
+                                    
+                                    <apex:pageBlockSection title="Recordtype"  >
+                                        <apex:selectcheckboxes layout="horizontal" value="{!selectedOppRecord}">    
+                                         <apex:selectoptions value="{!CheckOppRec}" />         
+                                        </apex:selectcheckboxes>
+                                    </apex:pageBlockSection> 
+                                    
+                                </apex:pageBlockSectionItem>
+                            </apex:outputPanel>
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <apex:pageBlockSection >
+                        <apex:pageBlockSectionItem >
+                            <apex:inputcheckbox value="{!chkBxLd}"   onclick="{!inputLd}" >
+                                
+                                <apex:actionSupport event="onchange"  action="{!clickLd}"/>  
+                                
+                            </apex:inputcheckbox>
+                            <apex:outputLabel styleClass="outlbl">Lead</apex:outputLabel>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                    
+                    
+                    <apex:pageBlock id="Ld" rendered="{!ldCheck}" >
+                        <apex:pageBlockSection >
+                            
+                            <apex:outputPanel id="Ld2" >    
+                                <apex:pageBlockSectionItem rendered="{!displayInputputTextLd}">
+                                    
+                                    <apex:pageBlockSection title="status" >
+                                        <apex:selectcheckboxes layout="Horizontal" value="{!selectedLdStatus}" >                  
+                                            <apex:selectoptions value="{!LdStatuss}" />         
+                                        </apex:selectcheckboxes>
+                                    </apex:pageBlockSection>  
+                                    
+                                    <apex:pageBlockSection title="Recordtype"  rendered="{!ldCheck}" >
+                                        <apex:selectcheckboxes layout="horizontal" value="{!selectedLdRecord}" >                  
+                                            <apex:selectoptions value="{!CheckLdRec}" />         
+                                        </apex:selectcheckboxes>
+                                    </apex:pageBlockSection>
+                                    
+                                </apex:pageBlockSectionItem>
+                            </apex:outputPanel>
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+                    
+                </apex:pageBlock> 
+            </div>          
+        </apex:pageBlock>
+        <style>
+            body .bPageBlock .detailList .labelCol, .slds-vf-scope .bPageBlock .detailList .labelCol{
+            position:relative !important;
+            width:1% !important;
+            }
+        </style>
+         <style>
+            .outlbl{
+                position:relative; 
+             bottom:-1px;
+             left:-12px;
+             font-weight:bold;
+             font-size:14px;
+            }
+        </style>
+       
+           <style>
+            body .list td, body .list .dataCell, body .detailList td, body .detailList .dataCell,
+            body .listViewport table td, body .listViewport table .dataCell, .slds-vf-scope .list td, 
+            .slds-vf-scope .list .dataCell, .slds-vf-scope .detailList td, .slds-vf-scope .detailList .dataCell, 
+            .slds-vf-scope .listViewport table td, .slds-vf-scope .listViewport table .dataCell {
+    white-space: pre;
+    width:50%;
+    bottom: 3px;
+           
+}
+        </style>  
+        
+    </apex:form>
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            $("[id$='Acc']").css('margin-left' , '35px');
+            $("[id$='Con']").css('margin-left' , '35px');
+            $("[id$='Cs']").css('margin-left' , '35px');
+            $("[id$='Opp']").css('margin-left' , '35px');
+            $("[id$='Ld']").css('margin-left' , '35px');
+        });
+    </script>
+</apex:page>

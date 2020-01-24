@@ -1,0 +1,18 @@
+<aura:component >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="CompId" type="string" default="CheckboxId"/>
+    <aura:attribute name="map" type="map"/>
+    <aura:attribute name="key" type="string"/>
+    <aura:attribute name="value" type="string"/>
+<aura:registerEvent name="updateShippingAmount" type="c:shippingamountevent"/>
+    <div class="slds-text-Horizontal">
+   <!-- <input type="radio"  name="atul"  ></input>
+    <p>{!v.value}</p> -->
+        <input aura:id="assignmentOptions" name="radioButtonGroup"  type="radio" value="{!v.value}" required="true" onclick="{!c.handleSelectedContacts}"></input>
+      <label class="slds-checkbox__label" for="{!v.CompId}">  
+           <span class="slds-checkbox--faux">{!v.key}</span> 
+            <!--<span class="slds-form-element__label"> {!v.InputLabel}</span>-->
+       </label>
+
+   </div>
+</aura:component>

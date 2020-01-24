@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Fee_Alert</fullName>
+        <ccEmails>dsreenath1992@gmail.com</ccEmails>
+        <description>Fee Alert To Parent</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Parent_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>CFS_Email_Templates/Fee_Due_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Fee_Alert_before_2_days</fullName>
+        <ccEmails>dsreenath1992@gmail.com</ccEmails>
+        <ccEmails>gudinagarjuna129@gmail.com</ccEmails>
+        <description>Fee Alert before 2 days</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Parent_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>CFS_Email_Templates/Fee_Due_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Fee_Alert_before_7_days</fullName>
+        <ccEmails>dsreenath1992@gmail.com</ccEmails>
+        <ccEmails>gudinagarjuna128@gmail.com</ccEmails>
+        <description>Fee Alert before 7 days</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Parent_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>CFS_Email_Templates/Fee_Due_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Fee_Due_Alert</fullName>
+        <ccEmails>dsreenath1992@gmail.com</ccEmails>
+        <description>Fee Due Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Parent_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>CFS_Email_Templates/Fee_Due_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Fee_Due_Alert_before_7_days</fullName>
+        <ccEmails>dsreenath1992@gmail.com</ccEmails>
+        <description>Fee Due Alert before 7 days</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Parent_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>CFS_Email_Templates/Fee_Due_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Joining_Email_Alert</fullName>
+        <ccEmails>gudinagarjuna129@gmail.com</ccEmails>
+        <description>Joining Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Parent_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>CFS_Email_Templates/Joining_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Result_email_Remainder</fullName>
+        <ccEmails>gudinagarjun129@gmail.com</ccEmails>
+        <description>Result Email Remainder</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Parent_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Student_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>CFS_Email_Templates/Results_Email</template>
+    </alerts>
+    <rules>
+        <fullName>Fee Alert before 2 days</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Student__c.Total_Fee__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Fee_Alert_before_2_days</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Student__c.Joining_Date__c</offsetFromField>
+            <timeLength>-2</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Fee Alert before 7 days</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Student__c.Total_Fee__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Fee_Alert_before_7_days</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Student__c.Joining_Date__c</offsetFromField>
+            <timeLength>-7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Fee Due Alert before 15 days</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Student__c.Total_Fee__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Fee_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Student__c.Joining_Date__c</offsetFromField>
+            <timeLength>-15</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Fee Due Notification</fullName>
+        <active>false</active>
+        <formula>ISBLANK( Joining_Date__c )</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

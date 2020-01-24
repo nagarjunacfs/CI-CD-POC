@@ -1,0 +1,472 @@
+<aura:component controller="ShipnowController"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global">
+    
+    <!---Vandana-->
+    <ltng:require styles="{!$Resource.SLDS24 + '/styles/salesforce-lightning-design-system.css'}"/>
+    
+    <!--declare attributes--> 
+    <aura:attribute name="selectedRecord" type="Account" default="{}" description="Use,for store SELECTED sObject Record"/>
+    <aura:attribute name="listOfSearchRecords" type="Account[]" description="Use,for store the list of search records which returns from apex class"/>
+    <aura:attribute name="SearchKeyWord" type="string"/>
+    <aura:attribute name="Message" type="String" default="Search Result.."/>
+    
+    
+    <!--declare events handlers-->  
+    <aura:handler name="oSelectedAccountEvent" event="c:selectedAccountEvent" action="{!c.handleComponentEvent}"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <!-- Atul, hanumanth -->
+     <aura:attribute name="currentStep" type="string" default="2"/>
+    <aura:attribute name="companyMap" type="Map"/> 
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name= "NextPage" type="boolean" default ="false"/> 
+    <aura:attribute name= "whole" type="boolean" default ="false"/> 
+    <aura:attribute name="keyList1" type="List" />
+    <aura:attribute name="companyMap1" type="Map"/> 
+    <aura:attribute name="keyList2" type="List" />
+    <aura:attribute name="companyMap2" type="Map"/> 
+    <aura:attribute name="keyList" type="List" />
+    <aura:attribute name="value" type="String" default="option1"/>
+    <aura:attribute name="myvalue" type="List"/>
+    <aura:attribute name="myText" type="string" default="Thankyou"/>
+    <aura:attribute name="myText1" type="string" default="Your order has been successfully submitted"/>
+    <aura:attribute name="currentStep1" type="string" default="1"/>
+    <aura:attribute name="account" type="Object" 
+                    description="The record object to be displayed"/>
+    <aura:attribute name="accountRecord" type="Object" 
+                    description="A simplified view record object to be displayed"/>
+    <aura:attribute name="recordSaveError" type="String" 
+                    description="An error message bound to force:recordData"/>
+    
+    <aura:attribute name="currentshippingamount" type="string" default="0"/>
+    <aura:handler name="updateShippingAmount" event="c:shippingamountevent"
+                  action="{!c.handleUpdateAmount}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    
+    
+     <!-- Atul, hanumanth -->
+    
+    <aura:handler name="init" value="{!this}" action="{!c.myAction}" />
+    <aura:attribute name="nameLabels" type="List" default="[]" />
+    
+    <aura:attribute name="shippingDetails" type="Object"/>
+	<aura:attribute name="shippingDetailsRecord" type="Object"/>
+	<aura:attribute name="recordError" type="String"/>
+
+    <aura:attribute name="defaultAddressVal" type="String" default="" />
+   
+    <aura:attribute name="dropdown" type="boolean" default="" />
+    <aura:attribute name="DefaultAddressValue" type="String"/>
+    <aura:attribute name="SourceAddressValue" type="String" default="{!v.DefaultAddressValue}" />
+
+    <aura:attribute name="addressoptions" type="List" default="[
+    {'label': 'Shipping Address', 'value': 'shippingaddress'},
+    {'label': 'Type Here', 'value': 'typehere'},
+    ]" />
+   
+    
+     <!-- Package Component -->
+	<aura:attribute name="options" type="List" default="[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInitPackage}"/>
+    
+    <aura:attribute name="shipnowpage" type="boolean" default="true" />
+    <aura:attribute name="packagepage" type="boolean" default="false" />
+	
+    <aura:attribute name="shipStreet" type="string" default=""/>
+	<aura:attribute name="shipCity" type="string" default=""/>
+    <aura:attribute name="shipState" type="string" default=""/>
+    <aura:attribute name="shipCountry" type="string" default=""/>
+    <aura:attribute name="shipZipcode" type="string" default=""/>
+    <aura:attribute name="phoneNum" type="string" default=""/>
+    
+    <force:recordData aura:id="record"
+		layoutType="FULL"
+		recordId="{!v.recordId}"
+		targetError="{!v.recordError}"
+		targetRecord="{!v.shippingDetails}"
+		targetFields="{!v.shippingDetailsRecord}"
+    	fields="ShippingStreet, ShippingCity, ShippingState, ShippingPostalCode, ShippingCountry, Phone_Number__c, TotalAmount" 
+		mode="EDIT"/>
+    <!--
+		<aura:attribute name="orderAmount" type="Object"/>
+	<aura:attribute name="orderAmountRecord" type="Object"/>
+	<aura:attribute name="recordErr" type="String"/>
+    
+     <force:recordData aura:id="record"
+		layoutType="FULL"
+		recordId="{!v.recordId}"
+		targetError="{!v.recordErr}"
+		targetRecord="{!v.orderAmount}"
+		targetFields="{!v.orderAmountRecord}"
+    	fields="TotalAmount" 
+		mode="EDIT"/>
+    -->
+        <aura:if isTrue="{!v.shipnowpage}" >
+    <div class="slds-box">
+        
+        <div class="slds-card" >
+                
+                <div class="slds-p-around_small" style="font-size:20px;font-weight: bold;text-align: center;">ShipNow</div>      
+            </div>
+         <lightning:progressIndicator currentStep="{!v.currentStep}" type="base" >
+                <lightning:progressStep label="Address Info" value="1" onclick="{!c.myAction}"/>
+                <lightning:progressStep label="Shipment Info" value="2" onclick="{!c.Proceed}"/>
+                <lightning:progressStep label="Courier Account" value="3"/>
+                <lightning:progressStep label="Courier Selection" value="4"/>
+                
+            </lightning:progressIndicator>
+        
+           <lightning:combobox aura:id="sourceAddress" placeholder="{!v.defaultAddressVal}" name="sourceAddress" label="Source Address"
+            options="{!v.nameLabels}" onchange="{!c.onClickDropdown}" style="font-weight: bold; color:#B22222;" />
+
+        <input style="width:100%;" id="text-input-01" class="slds-input" type="text" value="{!v.SourceAddressValue}"
+            disabled="true" />
+
+        
+        <lightning:combobox name="destationaddress" label="Destination Address" value="" placeholder="Choose Address"
+            options="{! v.addressoptions }" onchange="{!c.clickDropDown}" style="font-weight: bold;color:#B22222;" />
+
+
+        <section class="shipnow">
+            <aura:if isTrue="{!v.dropdown}">
+
+                <div class="slds-box">
+
+                    <div class="streetcls" style="width: 100%; font-weight: bold;">
+                        <lightning:input aura:id="shipstreet" name="street" label="Street" value="{!v.shipStreet}" />
+                    </div>
+
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:input aura:id="shipcity" name="city" label="City" value="{!v.shipCity}" style="font-weight: bold;" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:input aura:id="shipstate" name="state" label="State" value="{!v.shipState}" style="font-weight: bold;" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:input aura:id="shipzipcode" name="zipcode" label="ZipCode" value="{!v.shipZipcode}" style="font-weight: bold;" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:input aura:id="shipcountry" name="country" label="Country" value="{!v.shipCountry}" style="font-weight: bold;" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:input aura:id="phonenumber" name="phonenumber" label="Phone Number" value="{!v.phoneNum}" style="font-weight: bold;" />
+                        </div>
+                       <!-- <div class="slds-col slds-size_1-of-3">
+                            <lightning:input name="company" label="Company" style="font-weight: bold;" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:input name="contactName" label="Contact Name" style="font-weight: bold;" />
+                        </div>-->
+                        
+                        <!--Vandana-->
+                             <div class="slds-col slds-size_1-of-3">
+                            <div class="slds-m-around--large" Style="margin: 0px;">
+                                <div aura:id="searchRes" class="slds-form-element slds-lookup slds-is-close" data-select="single">
+                                    <label class="slds-form-element__label" for="lookup-348"  style="font-weight: bold;"> Company Name </label>
+                                    <!--This part is for display search bar for lookup-->  
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-input-has-icon slds-input-has-icon--right">
+                                            <c:SVG class="slds-input__icon slds-show" xlinkHref="{!$Resource.SLDS24 + '/utility-sprite/svg/symbols.svg#search'}" />
+                                            <!-- This markup is for when an record is selected -->
+                                            <div aura:id="lookup-pill" class="slds-pill-container slds-hide">
+                                                <span class="slds-pill">
+                                                    <span class="slds-pill__label">
+                                                        {!v.selectedRecord.Name}  
+                                                    </span>
+                                                    <button class="slds-button slds-button--icon slds-pill__remove" onclick="{!c.clear}">
+                                                    <c:SVG class="slds-button__icon" xlinkHref="{!$Resource.SLDS24 + '/utility-sprite/svg/symbols.svg#close'}" />
+                                                        <span class="slds-assistive-text">Remove</span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <div aura:id="lookupField" class="slds-show">
+                                                <ui:inputText  updateOn="keyup" keyup="{!c.keyPressController}" class="slds-lookup__search-input slds-input " value="{!v.SearchKeyWord}" placeholder="search.."/>
+                                            </div>   
+                                        </div>
+                                    </div>
+                                    <!--This part is for Display typehead lookup result List-->  
+                                    <div class="slds-lookup__menu slds" id="lookup-348">
+                                        <div class="slds-lookup__item--label slds-text-body--small">{!v.Message}</div>
+                                        <center> <ui:spinner aura:id="spinner"/> </center>
+                                        <ul class="slds-lookup__list" role="listbox">
+                                            <aura:iteration items="{!v.listOfSearchRecords}" var="singleRec">
+                                                <c:customLookupResult oAccount="{!singleRec}" />
+                                            </aura:iteration>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <c:ContactLookupComponent/>
+    
+                        <div class="slds-col slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-checkbox">
+                                        <input type="checkbox" name="options" id="checkbox-2" value="checkbox-2"
+                                            style="font-weight: bold;" />
+                                        <label class="slds-checkbox__label" for="checkbox-2">
+                                            <span class="slds-checkbox_faux"></span>
+                                            <span class="slds-form-element__label">Residential Address</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aura:if>
+            
+        </section>
+        <br></br>
+        <lightning:button variant="destructive" label="Next" title="Next Button" onclick="{! c.NavigatetoC2 }" />
+    </div>
+</aura:if>
+
+
+  <!-- Package Component -->
+        <!--Shipment info Start-->
+    
+    
+    
+  <aura:if isTrue="{!v.packagepage}">
+    <div class="slds-box"  style="background-color: white;">
+        
+        
+        <div class="slds-card" >
+                
+                <div class="slds-p-around_small" style="font-size:20px;font-weight: bold;text-align: center;">ShipNow</div>      
+            </div>
+        
+        <lightning:progressIndicator currentStep="{!v.currentStep}" type="base" >
+                <lightning:progressStep label="Address Info" value="1" onclick="{!c.myAction}"/>
+                <lightning:progressStep label="Shipment Info" value="2" onclick="{!c.Proceed}"/>
+                <lightning:progressStep label="Courier Account" value="3"/>
+                <lightning:progressStep label="Courier Selection" value="4"/>
+                
+            </lightning:progressIndicator>
+    <div class="inputbox">
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="shipdate" >
+            <lightning:input type="date" name="shipdate" displayDatePicker="true" label="Ship Date" style="font-weight: bold; "/>
+        </div>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning:input type="string" name="noofpackage" label="Number of Packages" style="font-weight: bold; width: 100% "/>
+        </div> 
+        <div class="slds-col slds-size_1-of-2">
+            <lightning:input type="string" name="weight" label="Weight" style="font-weight: bold; "/>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning:input type="string" name="declaredvalue" label="Declared Value" value="{!v.shippingDetailsRecord.TotalAmount}" style="font-weight: bold;"/>
+        </div>
+    </div>
+        </div>
+    <div class="comboboxlist">
+        <lightning:combobox aura:id="selectItem" name="status" label="Packaging Type"
+                            placeholder="Your Packaging"
+                            onchange="{!c.handleOptionSelected}"
+                            value=""
+                            options="{!v.options}"
+                            style="font-weight: bold; " />
+    </div>
+    <br></br>
+    <lightning:button variant="destructive" label="Next" title="Next Button" onclick="{! c.handleClick }"/>
+    
+</div>
+    </aura:if>
+
+    <!--Shipment Info End-->
+    
+    <!-- Atul,Hanumanth !-->
+    <!-- <button class="slds-button slds-button_destructive" onclick="{!c.myAction}">Preview</button> -->
+   
+    <aura:if isTrue="{!v.whole}">
+        <div class="slds-box" style="width:630px;background-color:white;">
+            <div class="slds-card" >
+                
+                <div class="slds-p-around_small" style="font-size:20px;font-weight: bold;text-align: center;">ShipNow</div>      
+            </div>
+            <br></br>
+            <lightning:progressIndicator currentStep="{!v.currentStep}" type="base" >
+                <lightning:progressStep label="Address Info" value="1" onclick="{!c.myAction}"/>
+                <lightning:progressStep label="Shipment Info" value="2" onclick="{!c.Proceed}"/>
+                <lightning:progressStep label="Courier Account" value="3"/>
+                <lightning:progressStep label="Courier Selection" value="4"/>
+                
+            </lightning:progressIndicator>
+            <h6 style="font-size:20px;font-weight: bold;margin-left:10px;margin-top:30px;">Shipping Rates to use</h6>
+            <button class="slds-button slds-button_destructive" style="margin-left: 10px;background-color: dimgrey;border-color: black;font-size: initial;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  My Shipping Rate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </button>
+            <button class="slds-button slds-button_destructive"  style="background-color:darkgray;border-color: black;font-size: initial;" >My Customer Shipping Rate</button>
+            <br></br>
+            <br></br>
+            <div class="slds-box" style="margin-left: 10px;width: 500px;;">
+                <table class="slds-table ">
+                    <thead>
+                        <tr class="slds">
+                            <th class="" scope="col">
+                                <div class="slds" title="COURIER" style="margin-left: 10px;">COURIER</div>
+                            </th>
+                            <th class="New" scope="col">
+                                <div class="slds" title="RadioButton" style="text-align: center;">&nbsp;</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds" title="SHIPPING CHARGES" style="text-align: center;">SHIPPING CHARGES</div>
+                            </th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="slds-hint-parent">
+                            <td data-label="COURIER">
+                                <div class="slds-image" style="margin-left:10px;" title="COURIER"><img src="{!$Resource.FedEx}"/></div>
+                            </td>
+                            
+                            <td>
+                                <div class="slds-text-vertical">
+                                    <aura:iteration items = "{!v.keyList}" var = "item"  >
+                                        <!--   <ui:input type="radio" aura:id="assignmentOptions" name="radioButtonGroup" label="{!v.key}" type="radio"  value="{!v.key}"/> -->
+                                        <c:RadioButtonCheck map="{!v.companyMap}" key="{!item}"  /> 
+                                        <br></br>
+                                    </aura:iteration>
+                                </div>
+                            </td>
+                            <td data-label="SHIPPING CHARGES">
+                                <div class="slds-text-vertical">
+                                    <aura:iteration items = "{!v.keyList}" var = "item1"  >
+                                        <c:RadioButtonCharge map="{!v.companyMap}" key="{!item1}"/>
+                                        <br></br>
+                                    </aura:iteration>
+                                </div>
+                                <!-- <div class="slds-text"  style="margin-left: 150px;" title="SHIPPING CHARGES">$50</div>
+            <br></br>
+        <div class="slds-text"  style="margin-left: 150px;" title="SHIPPING CHARGES">$60</div>
+            <br></br>
+        <div class="slds-text"  style="margin-left: 150px;" title="SHIPPING CHARGES">$70</div> -->
+                                
+                            </td>
+                            
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <td data-label="COURIER">
+                                <div class="slds-image" style="margin-left:10px;" title="COURIER"><img src="{!$Resource.Ups}"/></div>
+                            </td>
+                            
+                            <td>
+                                <div class="slds-text-vertical">
+                                    <aura:iteration items = "{!v.keyList1}" var = "item"  >
+                                        <c:RadioButtonCheck map="{!v.companyMap1}" key="{!item}"/>
+                                        <br></br>
+                                    </aura:iteration>
+                                </div>
+                            </td>
+                            <td data-label="SHIPPING CHARGES">
+                                <div class="slds-text-vertical">
+                                    <aura:iteration items = "{!v.keyList1}" var = "item1"  >
+                                        <c:RadioButtonCharge map="{!v.companyMap1}" key="{!item1}"/>
+                                        <br></br>
+                                    </aura:iteration>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <td data-label="COURIER">
+                                <div class="slds-image" style="margin-left:10px;" title="COURIER"><img src="{!$Resource.DHL}"/></div>
+                            </td>
+                            <td>
+                                <div class="slds-text-vertical">
+                                    <aura:iteration items = "{!v.keyList2}" var = "item"  >
+                                        <c:RadioButtonCheck map="{!v.companyMap2}" key="{!item}"/>
+                                        <br></br>
+                                    </aura:iteration>
+                                </div>
+                            </td>
+                            <td data-label="SHIPPING CHARGES">
+                                <div class="slds-text-vertical">
+                                    <aura:iteration items = "{!v.keyList2}" var = "item1"  >
+                                        <c:RadioButtonCharge map="{!v.companyMap2}" key="{!item1}"/>
+                                        <br></br>
+                                    </aura:iteration>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <force:recordData aura:id="accRec" 
+                              layoutType="FULL" 
+                              recordId="{!v.recordId}"  
+                              targetError="{!v.recordSaveError}"
+                              targetRecord="{!v.account}"
+                              targetFields="{!v.accountRecord}"
+                              mode="EDIT"
+                              />
+            
+            <!--Start of SAD :28-->
+            <button class="slds-button slds-button_destructive" style="margin-left: 411px;margin-top: 35px;" onclick="{!c.addOrder}">Add Order</button>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.isOpen}"> <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header" Style="width: 651px;">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.close }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate" >Adding Courier Charges to Order</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_small" id="modal-content-id-1" Style="width: 651px;">
+                    <p><b>Proceed to submit the order </b> </p>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer" Style="width: 651px;">
+                    <lightning:button variant="neutral" 
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.close }"/>
+                    <lightning:button variant="brand" 
+                                      label="Proceed"
+                                      title="Proceed"
+                                      onclick="{! c.Proceed }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+        
+    </aura:if>
+    <aura:if isTrue="{!v.NextPage}">
+        <div class="slds-box" style="width:630px;background-color:white;">
+            <div class="slds-card" >
+                
+                <div class="slds-p-around_small" style="font-size:20px;font-weight: bold;text-align: center;">ShipNow</div>      
+            </div>
+            <br></br>
+            <br></br>
+            <lightning:progressIndicator currentStep="{!v.currentStep}" type="base" >
+                <lightning:progressStep label="Step One" value="1" onclick="{!c.myAction}"/>
+                <lightning:progressStep label="Step Two" value="2" onclick="{!c.Proceed}"/>
+                <lightning:progressStep label="Step Three" value="3"/>
+                <lightning:progressStep label="Step Four" value="4"/>
+                
+            </lightning:progressIndicator>
+            <br></br>
+            <br></br>
+            
+            <ui:outputText  class="field"  value="{!v.myText}"/>
+            <br></br>
+            <ui:outputText  class="field1"  value="{!v.myText1}"/> 
+        </div>
+    </aura:if>
+    
+    <!-- END OF SAD :28-->
+</aura:component>

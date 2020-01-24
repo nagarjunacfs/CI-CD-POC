@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email_Field_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR( ISBLANK( Student_Email__c ) ,ISBLANK( Parent_Email__c  ))</errorConditionFormula>
+    <errorMessage>Please enter both Student Email &amp; Parent Email</errorMessage>
+</ValidationRule>

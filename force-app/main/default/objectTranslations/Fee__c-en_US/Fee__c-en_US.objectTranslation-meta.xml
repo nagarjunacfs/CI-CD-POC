@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Fee</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Fees</value>
+    </caseValues>
+    <layouts>
+        <layout>Fee Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- We should enter Hostel Fee only --></errorMessage>
+        <name>Hostel_Fee</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- We Should enter any one Fee Among Hostel Fee and Transportation Fee --></errorMessage>
+        <name>Hostel_Or_Transportation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Enter either Hostel or Transport Fee but not both --></errorMessage>
+        <name>Respective_Hostel_Or_Transport_Fee</name>
+    </validationRules>
+</CustomObjectTranslation>

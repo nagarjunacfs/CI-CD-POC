@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Class_Teacher_To__c</fullName>
+    <externalId>false</externalId>
+    <label>Class Teacher To</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>VIII Standard</fullName>
+                <default>false</default>
+                <label>VIII Standard</label>
+            </value>
+            <value>
+                <fullName>IX Standard</fullName>
+                <default>false</default>
+                <label>IX Standard</label>
+            </value>
+            <value>
+                <fullName>X Standard</fullName>
+                <default>false</default>
+                <label>X Standard</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

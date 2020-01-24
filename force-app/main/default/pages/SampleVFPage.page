@@ -1,0 +1,174 @@
+<apex:page controller="Chebtrail" lightningStylesheets="true">
+    <apex:form >
+        <apex:pageBlock >
+            
+            <apex:commandButton value="Save" action="{!save}" />
+            <apex:commandButton value="Cancel" action="{!save}"/>
+            
+            
+            
+            
+            <apex:pageBlock > 
+                <apex:pageBlockSection >
+                    
+                    <apex:inputcheckbox value="{!chkBxacc}" label="Account" onclick="{!inputacc}" style="word-wrap:break-word" > 
+                        
+                        <apex:actionSupport event="onchange" action="{!clickacc}"/> 
+                        
+                    </apex:inputcheckbox>
+                </apex:pageBlockSection>
+                <apex:pageBlock rendered="{!AccCheck}" >
+                    <apex:pageBlockSection >
+                        <apex:outputPanel id="Acc"> 
+                            <apex:pageBlockSectionItem rendered="{!displayInputputTextAcc}">
+                                
+                                
+                                <apex:pageBlockSection title="status" >
+                                    <apex:selectcheckboxes layout="horizontal" value="{!accRec}" style="left "> 
+                                        <apex:selectoptions value="{!accRecs}" /> 
+                                    </apex:selectcheckboxes>
+                                </apex:pageBlockSection> 
+                                
+                                
+                                
+                                <apex:pageBlockSection title="Recordtype" >
+                                    
+                                    <apex:selectcheckboxes layout="horizontal" value="{!Accrecord}"> 
+                                        <apex:selectoptions value="{!accRecord3}" /> 
+                                    </apex:selectcheckboxes>
+                                </apex:pageBlockSection>
+                                
+                                
+                                
+                            </apex:pageBlockSectionItem>
+                        </apex:outputPanel>
+                        
+                    </apex:pageBlockSection> 
+                </apex:pageBlock>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <apex:pageBlockSection >
+                    <apex:inputcheckbox value="{!chkBxCon}" label="Contact" onclick="{!inputCon}" style=" margin:left;"> 
+                        <apex:actionSupport event="onchange" action="{!clickCon}"/> 
+                        
+                    </apex:inputcheckbox>
+                </apex:pageBlockSection>
+                
+                <apex:pageBlock rendered="{!ConCheck}" >
+                    <apex:pageBlockSection >
+                        <apex:outputPanel id="Con"> 
+                            <apex:pageBlockSectionItem rendered="{!displayInputputTextCon}">
+                                
+                                <apex:pageBlockSection title="status" >
+                                    <apex:selectcheckboxes layout="Horizontal" value="{!ConRec}" style=" line-height: 12px;width: 800px;"> 
+                                        <apex:selectoptions value="{!ConRecs}" /> 
+                                    </apex:selectcheckboxes>
+                                </apex:pageBlockSection> 
+                                
+                            </apex:pageBlockSectionItem>
+                        </apex:outputPanel>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+                
+                
+                
+                
+                
+                
+                
+                <apex:pageBlockSection >
+                    <apex:inputcheckbox value="{!chkBxCs}" label="Case" onclick="{!inputCs}"> 
+                        <apex:actionSupport event="onchange" action="{!clickcs}"/> 
+                        
+                    </apex:inputcheckbox>
+                </apex:pageBlockSection>
+                
+                <apex:pageBlock rendered="{!CsCheck}" >
+                    <apex:pageBlockSection >
+                        <apex:outputPanel id="Cs"> 
+                            <apex:pageBlockSectionItem rendered="{!displayInputputTextCs}">
+                                
+                                <apex:pageBlockSection title="status" >
+                                    <apex:selectcheckboxes layout="Horizontal" value="{!Csstatus}" style=" line-height: 20px;width: 800px;"> 
+                                        <apex:selectoptions value="{!Csstatuss}" /> 
+                                    </apex:selectcheckboxes>
+                                </apex:pageBlockSection> 
+                                
+                            </apex:pageBlockSectionItem>
+                        </apex:outputPanel>
+                        
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+                
+                
+                
+                
+                
+                
+                <apex:pageBlockSection >
+                    <apex:inputcheckbox value="{!chkBxOpp}" label="Opportunity" onclick="{!inputOpp}"> 
+                        <apex:actionSupport event="onchange" action="{!clickOpp}"/> 
+                        
+                    </apex:inputcheckbox>
+                </apex:pageBlockSection>
+                
+                <apex:pageBlock rendered="{!OppCheck}">
+                    <apex:pageBlockSection >
+                        <apex:outputPanel id="Opp"> 
+                            <apex:pageBlockSectionItem rendered="{!displayInputputTextOpp}">
+                                
+                                <apex:pageBlockSection title="status" >
+                                    <apex:selectcheckboxes layout="Horizontal" value="{!OppStg}" style=" line-height: 20px;width: 800px;"> 
+                                        <apex:selectoptions value="{!OppStgs}" /> 
+                                    </apex:selectcheckboxes>
+                                </apex:pageBlockSection> 
+                                
+                            </apex:pageBlockSectionItem>
+                        </apex:outputPanel>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+                
+                
+                
+                
+                
+                
+                <apex:pageBlockSection >
+                    <apex:inputcheckbox value="{!chkBxLd}" label="Lead" onclick="{!inputLd}"> 
+                        <apex:actionSupport event="onchange" action="{!clickLd}"/> 
+                        
+                    </apex:inputcheckbox>
+                </apex:pageBlockSection>
+                
+                
+                <apex:pageBlock rendered="{!LdCheck}" >
+                    <apex:pageBlockSection >
+                        
+                        <apex:outputPanel id="Ld"> 
+                            <apex:pageBlockSectionItem rendered="{!displayInputputTextLd}">
+                                
+                                <apex:pageBlockSection title="status" >
+                                    <apex:selectcheckboxes layout="Horizontal" value="{!LdStatus}" style=" line-height: 20px;width: 800px;"> 
+                                        <apex:selectoptions value="{!LdStatuss}" /> 
+                                    </apex:selectcheckboxes>
+                                </apex:pageBlockSection> 
+                                
+                            </apex:pageBlockSectionItem>
+                        </apex:outputPanel>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+                
+                
+            </apex:pageBlock> 
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,97 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="ShipnowController">
+    <!-- <aura:attribute name="accountAddress" type="string" /> 
+    <aura:handler name="initialAddress" value="{!this}" action="{!c.doInit}"/>  -->
+   
+    <aura:handler name="init" value="{!this}" action="{!c.myAction}" />
+    <aura:attribute name="optVal" type="List"/>
+    
+    <aura:attribute name="SourceAddressValue" type="String"/>
+    
+    <aura:attribute name="isSelected" type="boolean" default="true" />
+    
+    <aura:attribute name="dropdown" type="boolean" default="false"></aura:attribute>
+    <div class="slds-box">
+
+        <h3 align="center"><b>ShipNow</b></h3>
+        
+        <!--
+        <lightning:select aura:id="select" name="select" label="Source Address" >
+            <option value="1">Choose Address</option>
+            <option value="">Account Address</option>
+            <option value="">Contact Address</option>
+        </lightning:select>
+        <lightning:outputfield fieldName="defaultSource" type="string" default="Richmond Road, Shanthala nagar, Bangalore"></lightning:outputfield>
+     <div class="slds-text-body_regular">Richmond Road, Shanthala nagar, Bangalore</div> 
+        
+        -->
+        
+        <lightning:select aura:id="SourceSelect" name="SourceSelect" label="Source Address" onchange="{!c.onClickDropdown}">
+        <option value="">-- Choose Source Address --</option>
+        <aura:iteration items="{!v.optVal}" var="op">
+        <option value="{!op.nrg__Source_Address__c}" text="{!op.nrg__Source_Address__c}"></option>
+        </aura:iteration>
+    </lightning:select>
+        
+       <!-- <div class="placeHolderValue">
+        <lightning:input type="text" name="SourceAddress" value="{!v.SourceAddressValue}"></lightning:input>
+        </div> -->
+        <input id="text-input-01" class="slds-input" type="text" value="{!v.SourceAddressValue}" />
+
+
+       
+  	  	
+        <lightning:select aura:id="select" name="select" label="Destination Address" onchange="{!c.accAddress}">
+            <option value="1">Choose Address</option>
+            <option value="2">Account Address</option>
+            <option value="3">Contact Address</option>
+        </lightning:select>
+        
+        
+        <aura:if isTrue="{!v.dropdown}">
+        <div class="slds-box">
+            <lightning:input name="street" label="Street" style="width:200px;"/>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning:input name="city" label="City" />
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning:input name="state" label="State" />
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning:input name="zipcode" label="ZipCode" />
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning:input name="country" label="Country" />
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning:input name="phonenumber" label="Phone Number" />
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning:input name="company" label="Company" />
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning:input name="contactName" label="Contact Name" />
+                </div>
+                
+                 <div class="slds-col slds-size_1-of-3">
+                <div class="slds-form-element" >
+                    <div class="slds-form-element__control">
+                        <div class="slds-checkbox">
+                            <input type="checkbox" name="options" id="checkbox-2" value="checkbox-2"  />
+                            <label class="slds-checkbox__label" for="checkbox-2">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">Residential Address</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+         </aura:if>
+        <br></br>
+        <lightning:button variant="destructive" label="Next" title="Next Button" onclick="{! c.handleClick }"/>
+        
+        
+    </div>
+</aura:component>

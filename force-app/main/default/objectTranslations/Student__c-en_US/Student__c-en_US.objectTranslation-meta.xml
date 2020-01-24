@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Student</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Students</value>
+    </caseValues>
+    <layouts>
+        <layout>Student Layout</layout>
+        <sections>
+            <label><!-- Accomodation Details --></label>
+            <section>Accomodation Details</section>
+        </sections>
+        <sections>
+            <label><!-- Class Details --></label>
+            <section>Class Details</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Parent Information --></label>
+            <section>Parent Information</section>
+        </sections>
+        <sections>
+            <label><!-- Student Information --></label>
+            <section>Student Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Please enter both Emergency and Parent mobile numbers --></errorMessage>
+        <name>Contact_Number_Required</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter both Student Email &amp; Parent Email --></errorMessage>
+        <name>Email_Field_Required</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please Choose either Hostel or Transportation but not both --></errorMessage>
+        <name>Hostel_Or_Transport_Opt_One</name>
+    </validationRules>
+</CustomObjectTranslation>

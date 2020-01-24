@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sport_Name__c</fullName>
+    <externalId>false</externalId>
+    <label>Sport Choices</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Sport_Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Badminton</fullName>
+                <default>false</default>
+                <label>Badminton</label>
+            </value>
+            <value>
+                <fullName>Tennis</fullName>
+                <default>false</default>
+                <label>Tennis</label>
+            </value>
+            <value>
+                <fullName>Table Tennis</fullName>
+                <default>false</default>
+                <label>Table Tennis</label>
+            </value>
+            <value>
+                <fullName>Cricket</fullName>
+                <default>false</default>
+                <label>Cricket</label>
+            </value>
+            <value>
+                <fullName>Volley Ball</fullName>
+                <default>false</default>
+                <label>Volley Ball</label>
+            </value>
+            <value>
+                <fullName>FootBall</fullName>
+                <default>false</default>
+                <label>FootBall</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Indoor</controllingFieldValue>
+            <valueName>Badminton</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Indoor</controllingFieldValue>
+            <valueName>Tennis</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Indoor</controllingFieldValue>
+            <valueName>Table Tennis</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outdoor</controllingFieldValue>
+            <valueName>Cricket</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outdoor</controllingFieldValue>
+            <valueName>Volley Ball</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outdoor</controllingFieldValue>
+            <valueName>FootBall</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

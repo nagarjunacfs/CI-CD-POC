@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Stock_Storage_Locat__c</fullName>
+    <externalId>false</externalId>
+    <label>Stock Storage Locations</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Koramangala</fullName>
+                <default>false</default>
+                <label>Koramangala</label>
+            </value>
+            <value>
+                <fullName>Richmond Road</fullName>
+                <default>false</default>
+                <label>Richmond Road</label>
+            </value>
+            <value>
+                <fullName>Majestic</fullName>
+                <default>false</default>
+                <label>Majestic</label>
+            </value>
+            <value>
+                <fullName>K R Market</fullName>
+                <default>false</default>
+                <label>K R Market</label>
+            </value>
+            <value>
+                <fullName>Jayanagar</fullName>
+                <default>false</default>
+                <label>Jayanagar</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>9</visibleLines>
+</CustomField>

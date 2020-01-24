@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Place --></label>
+    <name>Place__c</name>
+    <picklistValues>
+        <masterLabel>Chittoor</masterLabel>
+        <translation><!-- Chittoor --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Kadapa</masterLabel>
+        <translation><!-- Kadapa --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Kurnool</masterLabel>
+        <translation><!-- Kurnool --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Rajamandry</masterLabel>
+        <translation><!-- Rajamandry --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Vijayawada</masterLabel>
+        <translation><!-- Vijayawada --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

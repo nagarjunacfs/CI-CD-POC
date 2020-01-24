@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>BlrBranch</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CFSBranch2</shortDescription>
+        <value>Bangalore</value>
+    </labels>
+    <labels>
+        <fullName>DelhiBranch</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CFSBranch3</shortDescription>
+        <value>Delhi</value>
+    </labels>
+    <labels>
+        <fullName>Institute1</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MumbaiBranch</shortDescription>
+        <value>Mumbai</value>
+    </labels>
+    <labels>
+        <fullName>Institute2</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Institute2</shortDescription>
+        <value>XT Institution</value>
+    </labels>
+    <labels>
+        <fullName>MumbaiBranch</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CFSBranch1</shortDescription>
+        <value>Mumbai</value>
+    </labels>
+</CustomLabels>

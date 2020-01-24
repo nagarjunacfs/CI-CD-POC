@@ -1,0 +1,36 @@
+.THIS.slds-select {
+    font-weight: bold !important;
+}
+
+.THIS .slds-textarea{
+    height: 30px;
+    width: 517px !important;
+    
+}
+
+.THIS .slds-input{
+    width: 150px;
+   
+}
+
+.THIS .slds-button{
+      margin-left: 452px;
+}
+
+.THIS.slds-box{
+    width: 550px !important;
+}
+
+.THIS .slds-checkbox{
+    padding-top: 30px !important;
+}
+
+
+.THIS .slds-button.slds-progress__marker{
+      margin-left: -5px ;
+}
+
+
+.THIS .slds-input.slds-combobox__input{
+    width: 518px !important;
+}

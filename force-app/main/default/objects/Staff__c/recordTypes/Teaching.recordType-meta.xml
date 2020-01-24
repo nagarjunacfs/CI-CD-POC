@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Teaching</fullName>
+    <active>true</active>
+    <label>Teaching</label>
+    <picklistValues>
+        <picklist>Class_Teacher_To__c</picklist>
+        <values>
+            <fullName>IX Standard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VIII Standard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>X Standard</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Department__c</picklist>
+        <values>
+            <fullName>Computer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Drawing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>English</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>General Studies</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mathematics</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Science</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,10 @@
+<aura:component >
+    <aura:handler name="init" value="{!this}" action="{!c.Init}"/>
+    <aura:attribute name="map" type="map"/>
+    <aura:attribute name="key" type="string"/>
+    <aura:attribute name="value" type="string"/>
+    <div class="slds-text-Horizontal">
+   <p><ui:outputText class="result" aura:id="radioGroupResult" value="" />{!v.value}</p>
+        
+</div>
+</aura:component>

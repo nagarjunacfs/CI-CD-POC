@@ -1,0 +1,55 @@
+<apex:page controller="CFSMultiSelectController">
+    <apex:form >
+    <apex:pageBlock title="CFS Institution" id="Institution">
+    
+        <apex:outputLabel >CFS Branches</apex:outputLabel>
+        <apex:panelGrid columns="3" id="selectedValue" >
+            <apex:selectList id="leftSelect" value="{!leftSelected}" multiselect="true" style="600px">
+                <apex:selectOptions value="{!unSelectedvalues}" />
+            </apex:selectList>
+            <apex:panelGroup >
+                <br/>
+                <apex:image styleClass="picklistArrowRight" value="/s.gif">
+                    <apex:actionSupport event="onclick" action="{!selectClick}" reRender="selectedValue"/>
+                </apex:image>
+                <br/><br/>
+                <apex:image styleClass="picklistArrowLeft" value="/s.gif">
+                    <apex:actionSupport event="onclick" action="{!unSelectclick}" reRender="selectedValue"/>
+                </apex:image>
+            </apex:panelGroup>
+            
+            <apex:selectList id="rightSelect" value="{!rightSelected}" multiselect="true"  style="width : 80px">
+                <apex:selectOptions value="{!SelectedValues}" />
+                
+            </apex:selectList>
+        </apex:panelGrid>
+        <apex:commandButton value="Save" action="{!save}"/>
+   
+    </apex:pageBlock>
+    
+    <apex:pageBlock title="Class">
+   
+        <apex:selectRadio layout="PageDirection" value="{!classValue}">
+            <apex:selectOption itemLabel="VIII Standard" itemValue="VIII Standard"></apex:selectOption><br/>
+            <apex:selectOption itemLabel="IX Standard" itemValue="IX Standard"></apex:selectOption><br/>
+            <apex:selectOption itemLabel="X Standard" itemValue="X Standard"></apex:selectOption><br/>
+            <apex:actionSupport event="onchange" action="{!submit}" rerender="none"/>
+        </apex:selectRadio>
+        <apex:commandButton value="Submit" action="{!submit}"/> 
+   
+    </apex:pageBlock>
+    <apex:pageBlock >
+	<apex:pageBlockSection title="Respective Class Details" columns="1" collapsible="false">
+	<apex:pageBlockTable value="{!results}" var="res">
+    <apex:column value="{!res.Student__r.Branch__c}"/>
+	<apex:column value="{!res.Student__r.Name}"/>
+	<apex:column value="{!res.Student__r.Standard__c}"/>
+	<apex:column value="{!res.Result__c}"/>
+	<apex:column value="{!res.Total_Marks__c}"/>
+	<apex:column value="{!res.Percentage__c}"/>
+	</apex:pageBlockTable>
+	</apex:pageBlockSection>
+
+	</apex:pageBlock>
+    </apex:form>
+</apex:page>

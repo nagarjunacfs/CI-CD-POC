@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Sport Choices --></label>
+    <name>Sport_Name__c</name>
+    <picklistValues>
+        <masterLabel>Badminton</masterLabel>
+        <translation><!-- Badminton --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cricket</masterLabel>
+        <translation><!-- Cricket --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FootBall</masterLabel>
+        <translation><!-- FootBall --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Table Tennis</masterLabel>
+        <translation><!-- Table Tennis --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Tennis</masterLabel>
+        <translation><!-- Tennis --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Volley Ball</masterLabel>
+        <translation><!-- Volley Ball --></translation>
+    </picklistValues>
+</CustomFieldTranslation>
